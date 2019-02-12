@@ -11,7 +11,7 @@ namespace Gomoku
 {
     public class Desk
     {
-        private static string _currentMessage;
+        private static string _currentMessage = string.Empty;
 
         public static void Play()
         {
@@ -51,7 +51,7 @@ namespace Gomoku
                         break;
                     }
                     grid.Set(cursor, currentPlayer.ToPiece());
-                    _currentMessage = String.Empty;
+                    _currentMessage = new string(' ', _currentMessage.Length);
                 }
                 catch (Exception e)
                 {
@@ -89,7 +89,9 @@ namespace Gomoku
 
         private static void PrintGrid(Grid grid, Point cursor)
         {
-            Console.Clear();
+            //Console.Clear();
+            Console.CursorTop = 0;
+            Console.CursorLeft = 0;
             Console.CursorVisible = false;
             Console.WriteLine("* Gomoku by Cyl18 *");
             Console.WriteLine("-------------------------------");
