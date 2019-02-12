@@ -72,8 +72,8 @@ namespace Gomoku
             void SwitchPlayer()
             {
                 // 不好看
-                // currentPlayer = (Player)(((int)currentPlayer + 1) % 2);
-                currentPlayer = currentPlayer == Player.Black ? Player.White : Player.Black;
+                currentPlayer = (Player)(((int)currentPlayer + 1) % 2);
+                // currentPlayer = currentPlayer == Player.Black ? Player.White : Player.Black;
             }
 
             void Move(int x, int y)
@@ -150,11 +150,13 @@ namespace Gomoku
         private static bool Check(Grid grid, Point point, Func<Point, Point> action)
         {
             var currentPiece = grid.Get(point);
-            return currentPiece == grid.Get(GetPoint()) &&
+            return Enumerable.Range(0, 4).All(_ => currentPiece == grid.Get(GetPoint()));
+            // 更加暴力
+            /* return currentPiece == grid.Get(GetPoint()) &&
                    currentPiece == grid.Get(GetPoint()) &&
                    currentPiece == grid.Get(GetPoint()) &&
                    currentPiece == grid.Get(GetPoint()); // 暴力
-
+                   */
             Point GetPoint()
             {
                 point = action(point);
